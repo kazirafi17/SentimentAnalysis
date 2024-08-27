@@ -11,6 +11,7 @@ This repository contains a deep Recurrent Neural Network (RNN) model for sentime
 - [Usage](#usage)
 - [Results](#results)
 - [Contributing](#contributing)
+- [Contact](#contact)
 
 
 ## Overview
@@ -75,3 +76,8 @@ The model achieves good accuracy on the validation dataset and performs well in 
 ## Contributing
 
 If you'd like to contribute to this project, please fork the repository and use a feature branch. Pull requests are welcome.
+
+
+## Contact
+
+For any questions or feedback, please contact. [Kazirafi98@gmail.com]
