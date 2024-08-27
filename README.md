@@ -11,11 +11,11 @@ This repository contains a deep Recurrent Neural Network (RNN) model for sentime
 - [Usage](#usage)
 - [Results](#results)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Overview
 
-This project aims to analyze text data to determine the sentiment behind it. The model leverages a deep RNN with GRU layers to capture the sequential nature of text data. The trained model is integrated into a web application using Streamlit, allowing users to input text and receive sentiment predictions.
+This project began with the implementation of a traditional machine learning model for sentiment analysis. However, after encountering poor accuracy and significant overfitting issues, a decision was made to transition to a deep Recurrent Neural Network (RNN) model. The deep RNN, with its ability to capture complex temporal dependencies in sequential data, provided a substantial improvement in performance and generalization. The final model is capable of classifying text into three sentiment categories: Positive, Negative, and Neutral. The trained model is integrated into a web application using Streamlit, allowing users to input text and receive sentiment predictions.
 
 ## Model Architecture
 
