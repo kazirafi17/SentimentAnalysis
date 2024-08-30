@@ -36,12 +36,24 @@ if 'user_input' not in st.session_state:
 st.sidebar.title('Example Texts')
 example_1 = "The movie was outstanding, a must-watch!"
 example_2 = "I was disappointed with the service, not coming back."
+example_3 = "Absolutely loved the new restaurant! Great food and atmosphere."
+example_4 = "I feel like the product did not meet my expectations. Very dissatisfied."
+example_5 = "It was an average experience. Nothing extraordinary but not bad either."
 
 if st.sidebar.button('Load Example 1'):
     st.session_state.user_input = example_1
 
 if st.sidebar.button('Load Example 2'):
     st.session_state.user_input = example_2
+
+if st.sidebar.button('Load Example 3'):
+    st.session_state.user_input = example_3
+
+if st.sidebar.button('Load Example 4'):
+    st.session_state.user_input = example_4
+
+if st.sidebar.button('Load Example 5'):
+    st.session_state.user_input = example_5
 
 # Text input
 user_input = st.text_area('Enter your text here:', value=st.session_state.user_input, height=200)
@@ -79,6 +91,20 @@ st.markdown("""
             background-color: #87CEEB;
             color: black;
             padding: 10px 0;
+        }
+
+        /* Button styling */
+        .stButton>button {
+            background-color: #2F4F4F;  /* Dark Gray Background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .stButton>button:hover {
+            background-color: #45a049;  /* Light Green Background on Hover */
         }
 
         /* Footer styling */
