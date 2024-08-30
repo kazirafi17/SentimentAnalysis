@@ -38,7 +38,7 @@ example_1 = "The movie was outstanding, a must-watch!"
 example_2 = "I was disappointed with the service, not coming back."
 example_3 = "Absolutely loved the new restaurant! Great food and atmosphere."
 example_4 = "I feel like the product did not meet my expectations. Very dissatisfied."
-example_5 = "It was an average experience. Nothing extraordinary but not bad either."
+example_5 = "Today’s weather was neither too hot nor too cold; it was just average"
 
 if st.sidebar.button('Load Example 1'):
     st.session_state.user_input = example_1
