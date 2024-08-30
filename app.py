@@ -4,17 +4,28 @@ import pickle
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # Load the trained model and tokenizer from .pkl files
-with open('model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+try:
+    with open('model.pkl', 'rb') as model_file:
+        model = pickle.load(model_file)
+except Exception as e:
+    st.error(f"Error loading model: {e}")
+    model = None
 
-with open('tokenizer.pkl', 'rb') as handle:
-    tokenizer = pickle.load(handle)
+try:
+    with open('tokenizer.pkl', 'rb') as handle:
+        tokenizer = pickle.load(handle)
+except Exception as e:
+    st.error(f"Error loading tokenizer: {e}")
+    tokenizer = None
 
 # Sentiment labels
 sentiment_labels = {0: "Positive Sentiment", 1: "Negative Sentiment", 2: "Neutral Sentiment"}
 
 # Function to preprocess and predict sentiment
 def predict_sentiment(text):
+    if tokenizer is None or model is None:
+        st.error("Model or tokenizer is not loaded correctly.")
+        return None
     # Preprocess the text
     text_seq = tokenizer.texts_to_sequences([text])
     text_padded = pad_sequences(text_seq, padding='post', maxlen=30)  # Use maxlen based on your model's training
@@ -35,17 +46,38 @@ user_input = st.text_area('Enter your text here:')
 if st.button('Analyze Sentiment'):
     if user_input.strip() != "":
         sentiment = predict_sentiment(user_input)
-        st.write(f"Predicted Sentiment: **{sentiment}**")
+        if sentiment:
+            st.write(f"Predicted Sentiment: **{sentiment}**")
     else:
         st.write("Please enter some text.")
 
 # Optional: Display some example texts
 st.sidebar.title('Example Texts')
-if st.sidebar.button('Load Example 1'):
-    st.sidebar.write('The movie was outstanding, a must-watch!')
-if st.sidebar.button('Load Example 2'):
-    st.sidebar.write('I was disappointed with the service, not coming back.')
+example_1 = "The movie was outstanding, a must-watch!"
+example_2 = "I was disappointed with the service, not coming back."
+example_3 = "Absolutely loved the new restaurant! Great food and atmosphere."
+example_4 = "I feel like the product did not meet my expectations. Very dissatisfied."
+example_5 = "It was an average experience. Nothing extraordinary but not bad either."
 
+if st.sidebar.button('Load Example 1'):
+    st.session_state.user_input = example_1
+
+if st.sidebar.button('Load Example 2'):
+    st.session_state.user_input = example_2
+
+if st.sidebar.button('Load Example 3'):
+    st.session_state.user_input = example_3
+
+if st.sidebar.button('Load Example 4'):
+    st.session_state.user_input = example_4
+
+if st.sidebar.button('Load Example 5'):
+    st.session_state.user_input = example_5
+
+# Set the text area value from session state
+user_input = st.text_area('Enter your text here:', value=st.session_state.get('user_input', ''), height=200)
+
+# Custom CSS
 st.markdown("""
     <style>
         /* Apply background color to the whole page */
@@ -70,6 +102,20 @@ st.markdown("""
             background-color: #87CEEB;
             color: black;
             padding: 10px 0;
+        }
+
+        /* Button styling */
+        .stButton>button {
+            background-color: #2F4F4F;  /* Dark Gray Background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .stButton>button:hover {
+            background-color: #45a049;  /* Light Green Background on Hover */
         }
 
         /* Footer styling */
