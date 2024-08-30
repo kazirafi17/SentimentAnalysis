@@ -42,7 +42,7 @@ if st.button('Analyze Sentiment'):
 # Optional: Display some example texts
 st.sidebar.title('Example Texts')
 if st.sidebar.button('Load Example 1'):
-    st.sidebar.write('The movie was outstanding, a must-watch!')
+    st.sidebar.write('The price of products are everage.')
 if st.sidebar.button('Load Example 2'):
     st.sidebar.write('I was disappointed with the service, not coming back.')
 
