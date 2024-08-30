@@ -33,25 +33,17 @@ def predict_sentiment(text):
     predictions = model.predict(text_padded)
     predicted_class_index = predictions.argmax(axis=-1)
     # Return the predicted sentiment label
-    return sentiment_labels[predicted_class_index[0]]
+    return sentiment_labels.get(predicted_class_index[0], "Unknown Sentiment")
+
+# Initialize session state for user_input
+if 'user_input' not in st.session_state:
+    st.session_state.user_input = ""
 
 # Streamlit app UI
 st.title('Deep RNN Sentiment Analysis App')
 st.write('Enter text to analyze its sentiment.')
 
-# Text input
-user_input = st.text_area('Enter your text here:')
-
-# Button to make prediction
-if st.button('Analyze Sentiment'):
-    if user_input.strip() != "":
-        sentiment = predict_sentiment(user_input)
-        if sentiment:
-            st.write(f"Predicted Sentiment: **{sentiment}**")
-    else:
-        st.write("Please enter some text.")
-
-# Optional: Display some example texts
+# Sidebar for example texts
 st.sidebar.title('Example Texts')
 example_1 = "The movie was outstanding, a must-watch!"
 example_2 = "I was disappointed with the service, not coming back."
@@ -74,8 +66,19 @@ if st.sidebar.button('Load Example 4'):
 if st.sidebar.button('Load Example 5'):
     st.session_state.user_input = example_5
 
-# Set the text area value from session state
-user_input = st.text_area('Enter your text here:', value=st.session_state.get('user_input', ''), height=200)
+# Text input
+user_input = st.text_area('Enter your text here:', value=st.session_state.user_input, height=200)
+
+# Button to make prediction
+if st.button('Analyze Sentiment'):
+    if user_input.strip() != "":
+        sentiment = predict_sentiment(user_input)
+        if sentiment:
+            st.write(f"Predicted Sentiment: **{sentiment}**")
+        else:
+            st.write("Error in prediction.")
+    else:
+        st.write("Please enter some text.")
 
 # Custom CSS
 st.markdown("""
