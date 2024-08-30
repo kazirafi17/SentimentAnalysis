@@ -45,7 +45,7 @@ st.write('Enter text to analyze its sentiment.')
 
 # Sidebar for example texts
 st.sidebar.title('Example Texts')
-example_1 = "The movie was outstanding, a must-watch!"
+example_1 = "The meeting is scheduled for 10 AM tomorrow."
 example_2 = "I was disappointed with the service, not coming back."
 example_3 = "Absolutely loved the new restaurant! Great food and atmosphere."
 example_4 = "I feel like the product did not meet my expectations. Very dissatisfied."
