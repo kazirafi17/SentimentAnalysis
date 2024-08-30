@@ -28,8 +28,23 @@ def predict_sentiment(text):
 st.title('Deep RNN Sentiment Analysis App')
 st.write('Enter text to analyze its sentiment.')
 
+# Initialize session state for user_input
+if 'user_input' not in st.session_state:
+    st.session_state.user_input = ""
+
+# Sidebar for example texts
+st.sidebar.title('Example Texts')
+example_1 = "The movie was outstanding, a must-watch!"
+example_2 = "I was disappointed with the service, not coming back."
+
+if st.sidebar.button('Load Example 1'):
+    st.session_state.user_input = example_1
+
+if st.sidebar.button('Load Example 2'):
+    st.session_state.user_input = example_2
+
 # Text input
-user_input = st.text_area('Enter your text here:')
+user_input = st.text_area('Enter your text here:', value=st.session_state.user_input, height=200)
 
 # Button to make prediction
 if st.button('Analyze Sentiment'):
@@ -39,13 +54,7 @@ if st.button('Analyze Sentiment'):
     else:
         st.write("Please enter some text.")
 
-# Optional: Display some example texts
-st.sidebar.title('Example Texts')
-if st.sidebar.button('Load Example 1'):
-    st.sidebar.write('The movie was outstanding, a must-watch!')
-if st.sidebar.button('Load Example 2'):
-    st.sidebar.write('I was disappointed with the service, not coming back.')
-
+# Custom CSS
 st.markdown("""
     <style>
         /* Apply background color to the whole page */
